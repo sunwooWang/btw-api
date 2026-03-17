@@ -41,12 +41,8 @@ def job_support():
 
 
 def start_scheduler():
-    # [테스트] 2분마다 실행 — 확인 후 아래 CronTrigger로 교체
-    _scheduler.add_job(job_news, IntervalTrigger(minutes=2), id="job_news")
-    _scheduler.add_job(job_support, IntervalTrigger(minutes=2), id="job_support")
-    # [운영] 아래 주석 해제 후 위 2줄 삭제
-    # _scheduler.add_job(job_news, CronTrigger(day_of_week="mon-fri", hour=8, minute=0))
-    # _scheduler.add_job(job_support, CronTrigger(hour=9, minute=0))
+    _scheduler.add_job(job_news, CronTrigger(day_of_week="mon-fri", hour=8, minute=0))
+    _scheduler.add_job(job_support, CronTrigger(hour=9, minute=0))
     _scheduler.start()
     print("[스케줄러] APScheduler 시작 완료", flush=True)
     logger.info("[스케줄러] APScheduler 시작 완료")
