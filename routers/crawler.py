@@ -54,11 +54,3 @@ def run_support_crawler():
     return {"status": "ok", **output}
 
 
-@router.post("/ranking/run")
-def run_ranking_crawler():
-    """랭킹 크롤러(ranking_crawler) 수동 실행"""
-    crawler_dir = os.environ.get("RANKING_CRAWLER_DIR", "")
-    output = _run_crawler(crawler_dir, "main.py")
-    if output["returncode"] != 0:
-        return JSONResponse(status_code=500, content={"status": "error", **output})
-    return {"status": "ok", **output}

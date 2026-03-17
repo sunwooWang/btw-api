@@ -34,17 +34,11 @@ def job_support():
     _run(os.environ.get("SUPPORT_CRAWLER_DIR", ""), "main.py", "지원사업 크롤러")
 
 
-def job_ranking():
-    _run(os.environ.get("RANKING_CRAWLER_DIR", ""), "main.py", "랭킹 크롤러")
-
-
 def start_scheduler():
-    # 뉴스 크롤러: 평일 오전 8시
-    _scheduler.add_job(job_news, CronTrigger(day_of_week="mon-fri", hour=8, minute=0))
-    # 지원사업 크롤러: 매일 오전 9시
-    _scheduler.add_job(job_support, CronTrigger(hour=9, minute=0))
-    # 랭킹 크롤러: 매일 오전 6시
-    _scheduler.add_job(job_ranking, CronTrigger(hour=6, minute=0))
+    # 뉴스 크롤러: 오후 5시 55분 (테스트용)
+    _scheduler.add_job(job_news, CronTrigger(hour=17, minute=55))
+    # 지원사업 크롤러: 오후 5시 55분 (테스트용)
+    _scheduler.add_job(job_support, CronTrigger(hour=17, minute=55))
 
     _scheduler.start()
     logger.info("[스케줄러] APScheduler 시작 완료")
